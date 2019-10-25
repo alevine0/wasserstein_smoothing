@@ -6,8 +6,8 @@ import math
 
 import time
 import sys
-sys.path.append('/nethome/ericwong/attack/wasserstein_attack')
-from lambertw import lambertw 
+from projected_sinkhorn.lambertw import lambertw 
+#from lambertw import lambertw
 from scipy.special import lambertw as lambertw_np
 # lambertw is not implemented in pytorch 
 
@@ -36,6 +36,7 @@ def lamw_np(x):
 def lamw(x): 
     I = x > 1e-10
     y = torch.clone(x)
+    #y[I] = lambertw.lambertw(x[I])
     y[I] = lambertw(x[I])
     return y
 
